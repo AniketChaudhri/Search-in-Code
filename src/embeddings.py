@@ -5,6 +5,7 @@ from tree_sitter import Tree
 from tree_sitter_languages import get_parser
 
 from constants import EXTENSIONS
+from textwrap import dedent
 
 class Embeddings:
     def __init__(self):
@@ -26,6 +27,16 @@ class Embeddings:
                     reached_root = True
                 if cursor.goto_next_sibling():
                     retracing = False
+
+    def _extract_functions(nodes, fp, file_content, relevant_node_types):
+        out = []
+        for n in nodes:
+            if n.type in relevant_node_types:
+                node_text = dedent('\n'.join(file_content.split('\n')[
+                                    n.start_point[0]:n.end_point[0]+1]))
+                out.append(
+                    {'file': fp, 'line': n.start_point[0], 'text': node_text})
+        return out
 
     def _get_functions(self, repo_path, extract_nodes):
         functions = []
