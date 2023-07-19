@@ -3,3 +3,6 @@ torch
 sentence-similarity
 validators
 gradio
+tree_sitter
+tree_sitter_builds
+tree_sitter_languages
