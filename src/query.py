@@ -1,10 +1,21 @@
 from loguru import logger
 import gzip
 import pickle
+import torch
+from sentence_transformers import util
 
 class Query:
     def __init__(self):
         pass
+
+    def _find_closest_embeddings(self, query_embedding, dataset):
+        cosine_similarity = util.cos_sim(query_embedding, dataset['embeddings'])[0]
+        top_results = torch.topk(cosine_similarity, k=min(3, len(cosine_similarity)), sorted=True)
+        out = []
+        for score, idx in zip(top_results[0], top_results[1]):
+            out.append((score, dataset['functions'][idx]))
+        return out
+
 
     def _query_embeddings(self, model, args):
         if not self._embeddings_exists(args):
