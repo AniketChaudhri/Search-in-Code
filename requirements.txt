@@ -1,1 +1,5 @@
 loguru
+torch
+sentence-similarity
+validators
+gradio
