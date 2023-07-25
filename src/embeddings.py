@@ -9,7 +9,7 @@ import sys
 from tree_sitter import Tree
 from tree_sitter_languages import get_parser
 
-from constants import EXTENSIONS
+from src.constants import EXTENSIONS
 from textwrap import dedent
 from sentence_transformers import SentenceTransformer
 
