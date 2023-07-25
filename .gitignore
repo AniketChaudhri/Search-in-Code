@@ -5,3 +5,6 @@ __pycache__/
 
 # gradio flags
 /flagged
+
+# git repos
+/src/repo/gitrepos

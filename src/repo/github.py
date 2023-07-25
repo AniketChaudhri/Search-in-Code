@@ -9,7 +9,7 @@ import requests
 # Threshold for maximum folder size (in bytes). This is set to 100MB
 MAX_SIZE = 100000000
 
-class GitHub:
+class GitHubRepo:
     def __init__(self):
         self.current_dir = os.getcwd()
         self.repo_path = os.path.join(self.current_dir, "src", "gitrepos")

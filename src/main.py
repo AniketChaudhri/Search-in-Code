@@ -1,12 +1,14 @@
 import gradio as gr
 from src.embeddings import Embeddings
 
-from src.github import GitHub
+from src.repo.base import RepoFactory
 from sentence_transformers import SentenceTransformer
 
 from src.query import Query
 
 def main(project_link):
+    obj = RepoFactory(project_link).make()
+    return "Done"
     github = GitHub()
     project = github.clone_repo(project_link)
     # unpack the project
@@ -22,9 +24,6 @@ def main(project_link):
     query = Query()
     model = SentenceTransformer(args.model_name_or_path)
     return query.perform_query(model, args)
-    # embeddings = Embeddings()
-    # embeddings.embed(args, model)
-    # return
     return link
 
 project_link = gr.Textbox(lines=2, placeholder="Enter github link or local project path")
