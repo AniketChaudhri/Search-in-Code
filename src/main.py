@@ -26,11 +26,11 @@ def main(project_link):
     return query.perform_query(model, args)
     return link
 
-project_link = gr.Textbox(lines=2, placeholder="Enter github link or local project path")
+project_link = gr.Textbox(lines=2, placeholder="Enter github link or local project path", label="Project Link")
 
 gr.Interface(
     fn=main,
-    inputs="text",
+    inputs=project_link,
     outputs="text"
 
 ).launch()
